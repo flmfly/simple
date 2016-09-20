@@ -1,0 +1,5 @@
+package simple.config.annotation;
+
+public enum RepresentationFieldType {
+	INPUT, HIDDEN, SELECT, CHECKBOX, RADIO, TEXTAREA, REFERENCE, DATE, DATETIME, TIME, TAB, BOOLEAN, TAGS, ATTACHMENT, HTML_EDITOR, SMS_VERIFY, IMG_VERIFY, QRCODE
+}
