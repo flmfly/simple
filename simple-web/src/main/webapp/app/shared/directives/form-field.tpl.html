@@ -1,0 +1,255 @@
+<!--also suitable for creation-->
+<style>
+    .field-title {
+        padding-left: 10px;
+        padding-right: 0px;
+    }
+    .field-input {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    @media (min-width: 1200px) {
+        .col-lg-1_5 {
+            width: 11.2%;
+        }
+        .col-lg-10_5 {
+            width: 88.8%;
+        }
+    }
+</style>
+<span ng-switch on="field.type.view" ng-hide="!field.visable">
+	<!--<span ng-switch-when="hidden">-->
+		<!--<input ng-model="entity[field.name]" type="hidden"/>-->
+	<!--</span>-->
+
+    <span ng-switch-when="ATTACHMENT">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="form-group">
+                <label ng-class="largeTitleCss">
+                    <i class="red fa fa-star" ng-hide="!field.required"></i>
+                    {{ field.title }}
+                    <i ng-show="field.refField" class="blue fa fa-share-alt"></i>
+                </label>
+                <div ng-class="largeFieldCss">
+                    <div attachment entity="entity" field="field"></div>
+                </div>
+            </div>
+        </div>
+	</span>
+
+    <span ng-switch-when="textarea">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="form-group">
+                <label ng-class="largeTitleCss">
+                    <i class="red fa fa-star" ng-hide="!field.required"></i>
+                    {{ field.title }}
+                    <i ng-show="field.refField" class="blue fa fa-share-alt"></i>
+                </label>
+
+                <div ng-class="largeFieldCss">
+                    <textarea id="{{domain.domainName}}_{{field.name}}"
+                              class="autosize-transition form-control"
+                              ng-click="textareaAutosize(domain.domainName + '_' + field.name)"
+                              ng-model="entity[field.name]"
+                              ng-focus="inputClick(field, $event)"
+                              ng-change="inputChange(field)"
+                              ng-readonly="field.type.disabled"
+                              placeholder="{{field.type.placeholder}}"></textarea>
+                </div>
+            </div>
+        </div>
+	</span>
+    <span ng-switch-when="tags">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="form-group">
+                <label ng-class="largeTitleCss">
+                    <i class="red fa fa-star" ng-hide="!field.required"></i>
+                    {{ field.title }}
+                    <i ng-show="field.refField" class="blue fa fa-share-alt"></i>
+                </label>
+
+                <div ng-class="largeFieldCss">
+                    <div tags-input entity="entity" field="field"></div>
+                </div>
+            </div>
+        </div>
+	</span>
+	<span ng-switch-when="input">
+		<div ng-class="normalFormGroupCss">
+            <div class="form-group">
+                <label ng-class="normalTitleCss">
+                    <i class="red fa fa-star" ng-hide="!field.required"></i>
+                    {{ field.title }}
+                    <i ng-show="field.refField" class="blue fa fa-share-alt"></i>
+                </label>
+
+                <div ng-class="normalFieldCss">
+                    <input type="text"
+                           class="form-control input-sm"
+                           style="{{(field.validation.type != 'string') ? 'text-align: right':''}}"
+                           ng-readonly="field.type.disabled"
+                           ng-model="entity[field.name]"
+                           ng-focus="inputClick(field, $event)"
+                           ng-change="inputChange(field)"
+                           placeholder="{{field.type.placeholder}}"/>
+                </div>
+            </div>
+        </div>
+	</span>
+	<span ng-switch-when="checkbox">
+		<em ng-hide="!field.required">*</em>
+		<label>{{ field.title}}</label>
+		<input ng-model="entity[field.name]" ng-checked="entity[field.name]" type="checkbox"/>
+	</span>
+    <span ng-switch-when="radio">
+		<div ng-class="normalFormGroupCss"
+             ng-hide="id == null && field.type.visable">
+            <div class="form-group">
+                <label ng-class="normalTitleCss">
+                    <i class="red fa fa-star" ng-hide="!field.required"></i>
+                    {{ field.title }}
+                    <i ng-show="field.refField" class="blue fa fa-share-alt"></i>
+                </label>
+
+                <div ng-class="normalFieldCss">
+                    <span ng-repeat="item in field.type.options"
+                          style="line-height: 30px">
+                        <input type="radio"
+                               class="ace input-sm"
+                               ng-model="entity[field.name].id"
+                               ng-value="item.id">
+                        <span class="lbl">{{item.name}}</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+	</span>
+    <span ng-switch-when="boolean">
+		<div ng-class="normalFormGroupCss">
+            <div class="form-group">
+                <label ng-class="normalTitleCss">
+                    <i class="red fa fa-star" ng-hide="!field.required"></i>
+                    {{ field.title }}
+                    <i ng-show="field.refField" class="blue fa fa-share-alt"></i>
+                </label>
+
+                <div ng-class="normalFieldCss">
+                    <div boolean
+                         entity="entity"
+                         field="field"></div>
+                </div>
+            </div>
+        </div>
+	</span>
+
+	<span ng-switch-when="select||enum">
+		<div ng-class="normalFormGroupCss">
+            <div class="form-group">
+                <label ng-class="normalTitleCss">
+                    <i class="red fa fa-star" ng-hide="!field.required"></i>
+                    {{ field.title }}
+                    <i ng-show="field.refField" class="blue fa fa-share-alt"></i>
+                </label>
+
+                <div ng-class="normalFieldCss">
+
+                    <div ng-if="field.type.options.length > 0"
+                         chosen
+                         type="field.type.view"
+                         placeholder="请选择..."
+                         val="entity[field.name]"
+                         items="field.type.options"
+                         deselected="{{!field.type.disabled}}"
+                         val-param="name"
+                         diseditable="field.type.disabled"></div>
+                    <input type="text"
+                           class="form-control input-sm"
+                           disabled="disabled"
+                           value="字典项不存在[{{field.type.dict}}]"
+                           ng-if="!field.type.options"/>
+                </div>
+            </div>
+        </div>
+	</span>
+	<span ng-switch-when="reference">
+		<div ng-class="normalFormGroupCss">
+            <div class="form-group">
+                <label ng-class="normalTitleCss">
+                    <i class="red fa fa-star" ng-hide="!field.required"></i>
+                    {{ field.title }}
+                    <i ng-show="field.type.refFields.length > 0 || field.refField" class="blue fa fa-share-alt">
+                        </i>
+                </label>
+
+                <div ng-class="normalFieldCss" ng-switch on="field.type.refType">
+                    <div ng-switch-when="SINGLE_TREE" disabled="field.type.disabled" reference-tree entity="entity"
+                         field="field" fields="fields" domain="domain"></div>
+                    <div ng-switch-when="SINGLE_QUERY" disabled="field.type.disabled" reference-table entity="entity"
+                         field="field" fields="fields" domain="domain"></div>
+                    <div ng-switch-when="MAP" reference-map entity="entity" field="field"></div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-repeat="refField in field.type.refFields"
+             ng-class="normalFormGroupCss">
+            <div class="form-group">
+                <label ng-class="normalTitleCss">
+                    {{ refField.title }}
+                    <i class="blue fa fa-share-alt"></i>
+                </label>
+
+                <div ng-class="normalFieldCss">
+                    <div reference-view target="entity[field.name]" path="refField.name"></div>
+                </div>
+            </div>
+        </div>
+	</span>
+	<span ng-switch-when="datetime||date||time">
+		<div ng-class="normalFormGroupCss">
+            <div class="form-group">
+                <label ng-class="normalTitleCss">
+                    <i class="red fa fa-star" ng-hide="!field.required"></i>
+                    {{ field.title }}
+                    <i ng-show="field.refField" class="blue fa fa-share-alt"></i>
+                </label>
+
+                <div ng-class="normalFieldCss">
+                    <div datetimepicker disabled="field.type.disabled" val="entity[field.name]" type="field.type.view"
+                         placeholder="field.type.placeholder"></div>
+                </div>
+            </div>
+        </div>
+	</span>
+    <span ng-switch-when="html_editor">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="form-group">
+                <label ng-class="largeTitleCss">
+                    <i class="red fa fa-star" ng-hide="!field.required"></i>
+                    {{ field.title }}
+                    <i ng-show="field.refField" class="blue fa fa-share-alt"></i>
+                </label>
+
+                <div ng-class="largeFieldCss">
+                    <div html-editor val="entity[field.name]"></div>
+                </div>
+            </div>
+        </div>
+	</span>
+	
+	<span ng-switch-when="qrcode">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="form-group">
+                <label ng-class="largeTitleCss">
+                    <i class="red fa fa-star" ng-hide="!field.required"></i>
+                    {{ field.title }}
+                    <i ng-show="field.refField" class="blue fa fa-share-alt"></i>
+                </label>
+
+                <div ng-class="largeFieldCss">
+                    <div qrcode entity="entity" field="field"></div>
+                </div>
+            </div>
+        </div>
+	</span>
+</span>

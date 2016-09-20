@@ -1,0 +1,67 @@
+<div class="page-header no-border" style="padding-bottom: 0px;">
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary btn-xs"
+                ng-click="back();">
+            <i class="fa fa-reply bigger-110"></i>&nbsp;&nbsp;返回
+        </button>
+    </div>
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary btn-xs"
+                ng-click="save()">
+            <i class="fa fa-save bigger-110"></i>&nbsp;&nbsp;保存
+        </button>
+    </div>
+    <div class="btn-group" ng-if="showAddMore && isNew">
+        <button type="button" class="btn btn-primary btn-xs"
+                ng-click="addNext()">
+            <i class="fa fa-save bigger-110"></i>&nbsp;&nbsp;继续新增
+        </button>
+    </div>
+</div>
+
+<div ng-show="error" style="position: relative;">
+    <div bindonce class="alert alert-danger" style="white-space:pre;max-width:none;margin-bottom: 5px" ng-bind="error"></div>
+    <span style="position:absolute;right:10px; top:10px;cursor: pointer" class="action-buttons" ng-click="removeError();">
+        <a><i class="fa fa-close blue bigger-150"></i></a>
+    </span>
+</div>
+
+<div ng-show="saveSuccess" style="position: relative;">
+    <div bindonce class="alert alert-success" style="white-space:pre;max-width:none;margin-bottom: 5px">保存成功!</div>
+    <span style="position:absolute;right:10px; top:10px;cursor: pointer" class="action-buttons" ng-click="saveSuccess=false;">
+        <a><i class="fa fa-close blue bigger-150"></i></a>
+    </span>
+</div>
+
+
+<div dynamic-form entity="entity" domain="domain"></div>
+
+<div class="space-4"></div>
+
+<div ng-show="saveSuccess" style="position: relative;">
+    <div bindonce class="alert alert-success" style="white-space:pre;max-width:none;margin-bottom: 0px">保存成功!</div>
+    <span style="position:absolute;right:10px; top:10px;cursor: pointer" class="action-buttons" ng-click="saveSuccess=false;">
+        <a><i class="fa fa-close blue bigger-150"></i></a>
+    </span>
+</div>
+
+<div class="page-header no-border" style="padding-bottom: 5px;">
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary btn-xs"
+                onClick="javascript:history.back(-1);">
+            <i class="fa fa-reply bigger-110"></i>&nbsp;&nbsp;返回
+        </button>
+    </div>
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary btn-xs"
+                ng-click="save()">
+            <i class="fa fa-save bigger-110"></i>&nbsp;&nbsp;保存
+        </button>
+    </div>
+    <div class="btn-group" ng-if="showAddMore && isNew">
+        <button type="button" class="btn btn-primary btn-xs"
+                ng-click="addNext()">
+            <i class="fa fa-save bigger-110"></i>&nbsp;&nbsp;继续新增
+        </button>
+    </div>
+</div>

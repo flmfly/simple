@@ -1,0 +1,47 @@
+<li class="" bindonce ng-repeat="menu in menus" id="nav_{{menu.code}}">
+    <a data-url="{{menu.uri && menu.uri || ''}}"
+       href="#!{{menu.uri && menu.uri || ''}}"
+       target="_self"
+       ng-click="menuClick(menu.uri, !menu.hasChildren)"
+       class="{{menu.hasChildren && 'dropdown-toggle' || ''}}">
+        <i ng-class=" 'menu-icon ' + menu.css"></i>
+        <span class="menu-text" style="position:relative;top:2px">{{ menu.name }}</span>
+        <b ng-show="menu.hasChildren" class="arrow fa fa-angle-down"></b>
+    </a>
+    <b class="arrow"></b>
+    <ul bo-if="menu.hasChildren" class="submenu">
+        <li class="" bindonce ng-repeat="child in menu.children"
+            id="nav_{{child.code}}">
+            <a href="#!{{child.uri}}"
+               data-url="{{child.uri && child.uri || ''}}"
+               target="_self"
+               ng-click="menuClick(child.uri, !child.hasChildren)"
+               class="{{child.hasChildren && 'dropdown-toggle' || ''}}">
+                <i class="menu-icon fa fa-caret-right"></i>
+                <span>
+                    <i ng-class="'menu-icon ' + child.css"></i>
+                    &nbsp;&nbsp;{{child.name}}
+                </span>
+                <b ng-show="child.hasChildren" class="arrow fa fa-angle-down"></b>
+            </a>
+            <b class="arrow"></b>
+            <ul bo-if="child.hasChildren" class="submenu">
+                <li class="" bindonce ng-repeat="child in child.children"
+                    id="nav_{{child.code}}">
+                    <a href="#!{{child.uri}}"
+                       data-url="{{child.uri && child.uri || ''}}"
+                       target="_self"
+                       ng-click="menuClick(child.uri, !child.hasChildren)">
+                    <span>
+                        <i ng-class="'menu-icon ' + child.css"></i>
+                        &nbsp;&nbsp;{{child.name}}
+                    </span>
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</li>
+
+

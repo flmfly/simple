@@ -1,0 +1,46 @@
+<div>
+    <input class="hidden" type="file" name="files[]" multiple>
+
+    <div>
+        <div>文件格式: {{format}}</div>
+        <div>文件大小不能超过: {{maxSize}}</div>
+        <div ng-if="checkDimension">图片尺寸不能超过: {{dimension}}</div>
+    </div>
+
+    <div class="space-2"></div>
+
+    <div class="btn btn-xs btn-primary fileinput-button" ng-click="selectFiles()">
+        <i class="glyphicon glyphicon-plus"></i>
+        <span>选择文件...</span>
+    </div>
+    <div class="space-2"></div>
+
+    <div
+            class="ui-progressbar ui-widget ui-widget-content ui-corner-all progress progress-striped active hidden"
+            role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37">
+        <div class="ui-progressbar-value ui-widget-header ui-corner-left progress-bar progress-bar-success"
+             style="width: 0%;"></div>
+    </div>
+
+
+    <table class="table table-striped files ng-cloak">
+        <tr ng-repeat="file in queue" style="vertical-align: middle;{{file.type.startsWith('image')?'line-height:50px':''}}">
+            <td style="padding-top: 16px">
+                <p class="name">
+                    <span ng-if="!file.type.startsWith('image')"><a ng-href="{{file.url}}" target="_blank">{{file.fileName}}</a></span>
+                    <span ng-if="file.type.startsWith('image')"><img ng-src="{{file.url}}" width="50" height="50" /></span>
+                </p>
+            </td>
+            <td style="padding-top: 16px; color: orangered;vertical-align: middle;">
+                <p class="size">{{file.id?'':'未保存'}}</p>
+            </td>
+            <td style="padding-top: 16px;vertical-align: middle;">
+                <p class="size">{{file.size}}</p>
+            </td>
+            <td style="padding-top: 16px;vertical-align: middle;">
+                <span style="cursor:pointer;" class="fa fa-remove red bigger-160"
+                      ng-click="removeAttachment(file);"></span>
+            </td>
+        </tr>
+    </table>
+</div>

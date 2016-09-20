@@ -1,0 +1,99 @@
+<div ng-class="shouldHide(field.type)? '':'input-group'">
+    <input type="hidden" ng-model="entity[field.type.refName][field.type.refId]"/>
+    <input type="text" class="form-control input-sm"
+           style="cursor: pointer"
+           readonly
+           ng-model="entity[field.type.refName][field.type.refLabel]"
+           placeholder="{{field.type.placeholder}}"
+           ng-click="showReference(field.type, domain.domainName, $event)"/>
+    <span style="cursor: pointer; background-color: transparent" class="input-group-addon no-border-left action-buttons"
+          ng-hide="shouldHide(field.type)"
+          ng-click="showReference(field.type, domain.domainName, $event)">
+        <a class="no-margin"><i class="fa fa-map-marker grey" style="width:14px"></i></a>
+    </span>
+    <span style="cursor: pointer; padding:6px; background-color: transparent"
+          class="input-group-addon no-border-left action-buttons"
+          ng-hide="shouldHide(field.type)"
+          ng-click="clear(field.type)">
+        <a class="no-margin"><i class="fa fa-trash-o pink2"></i></a>
+    </span>
+
+    <div class="col-xs-12" id="ref-{{field.name}}" style="height:0px; display: none">
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- QUERY CONTENT BEGINS -->
+                <div>
+                    <div class="row">
+                        <div dynamic-search entity="query" domain="refDomain"></div>
+                        <div class="form-horizontal">
+                            <div class="col-xs-12 col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label input-sm col-xs-3">
+                                        详细地址
+                                    </label>
+
+                                    <div class="col-xs-9">
+                                        <div class="input-group">
+                                            <input type="text"
+                                                   id="map_address_input"
+                                                   class="form-control input-sm"
+                                                   ng-model="address"
+                                                   ng-focus=""/>
+                                            <span style="cursor: pointer; background-color: transparent"
+                                                  class="input-group-addon no-border-left action-buttons"
+                                                  ng-click="queryLocation()">
+                                                <a class="no-margin"><i class="fa fa-search green"></i></a>
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QUERY CONTENT ENDS -->
+                <!-- TABLE CONTENT BEGINS -->
+                <div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div class="no-border-right row"
+                                 style="border: solid 1px #c3c3c3;height: 400px;border-right: none">
+                                <div style="height: 200px;">
+                                    <div style="border-bottom: solid 1px #c0c0c0; background-color: rgb(245, 245, 245)">
+                                        <i class="fa fa-th-list blue"
+                                                style="margin: 5px"></i>查询结果列表
+                                    </div>
+                                    <div style="height:176px;overflow-y: scroll"
+                                         id="location_list"></div>
+                                </div>
+                                <div style="height: 200px;">
+                                    <div style="border-bottom: solid 1px #c0c0c0;border-top: solid 1px #c0c0c0; background-color: rgb(245, 245, 245)">
+                                        <i class="fa fa-th-list blue" style="margin: 5px"></i>周边揽投部
+                                    </div>
+                                    <div style="height:173px;overflow-y: scroll"
+                                            id="outlet_list"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-9">
+                            <div class="row">
+                                <div class="col-xs-12" id="map_container"
+                                     style="width:100%;height:400px; border: solid 1px #c3c3c3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TABLE CONTENT ENDS -->
+
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+    </div>
+
+</div>
+
+

@@ -1,0 +1,15 @@
+<div ng-class="disabled? '':'input-group'">
+    <input class="form-control input-sm"
+           ng-model="viewVal"
+           ng-readonly="disabled"
+           type="text"
+           placeholder="{{placeholder}}">
+	<span class="input-group-addon no-border-left action-buttons reference-btn"
+          ng-show="!disabled">
+		<a class="no-margin"><i class="fa" ng-class="type==='time'?'fa-clock-o':'fa-calendar'"></i></a>
+	</span>
+	<span style="padding:6px;" class="input-group-addon no-border-left action-buttons reference-btn"
+          ng-show="!disabled">
+		<a class="no-margin"><i class="fa fa-trash-o pink2"></i></a>
+	</span>
+</div>

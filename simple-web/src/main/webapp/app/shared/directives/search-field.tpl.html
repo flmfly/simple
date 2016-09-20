@@ -1,0 +1,163 @@
+<!--also suitable for creation-->
+<span ng-switch on="field.type.view">
+	<span ng-switch-when="tags||input">
+		<div ng-class="singleLine ? 'col-xs-12':'col-lg-6 col-md-6 col-sm-12'">
+            <div class="form-group">
+                <label class="control-label input-sm col-xs-3">
+                    {{ field.title }}
+                </label>
+
+                <div class="col-xs-9">
+                    <div ng-if="field.isRange" class="input-daterange input-group">
+                        <input type="text"
+                               id="input_{{field.name}}_l"
+                               class="form-control input-sm"
+                               ng-model="entity[field.name]['lval']"
+                               ng-focus="inputClick(field, $event)"
+                               ng-change="inputChange(field, $event)"/>
+
+                        <span style="padding: 4px" class="input-group-addon no-border-left no-border-right background-transparent">
+                            <i class="fa fa-exchange blue"></i>
+                        </span>
+
+                        <input type="text"
+                               id="input_{{field.name}}_r"
+                               class="form-control input-sm"
+                               ng-model="entity[field.name]['rval']"
+                               ng-focus="inputClick(field, $event)"
+                               ng-change="inputChange(field, $event)"/>
+                    </div>
+                    <div ng-if="!field.isRange && field.canFuzzy" class="input-group">
+                        <input type="text"
+                               id="input_{{field.name}}"
+                               class="form-control input-sm"
+                               ng-model="entity[field.name]['val']"
+                               ng-focus="inputClick(field, $event)"
+                               ng-change="inputChange(field, $event)" />
+                        <span style="cursor: pointer; padding:5px;"
+                              class="input-group-addon no-border-left action-buttons"
+                              ng-class="entity[field.name]['fuzzy']?'':'background-transparent'"
+                              ng-click="toggleFuzzy(field, $event)">
+                            <a class="no-margin">
+                                <i class="fa"
+                                   ng-class="entity[field.name]['fuzzy']?'fa-circle-o':'fa-dot-circle-o'"></i>
+                            </a>
+                        </span>
+                    </div>
+                    <div ng-if="!field.isRange && !field.canFuzzy">
+                        <input type="text"
+                               id="input_{{field.name}}"
+                               class="form-control input-sm"
+                               ng-model="entity[field.name]['val']"
+                               ng-focus="inputClick(field, $event)"
+                               ng-change="inputChange(field, $event)" />
+                    </div>
+                </div>
+            </div>
+        </div>
+	</span>
+
+	<span ng-switch-when="date||datetime||time">
+		<div ng-class="singleLine ? 'col-xs-12':'col-lg-6 col-md-6 col-sm-12'">
+            <div class="form-group">
+                <label class="control-label input-sm col-xs-3">
+                    {{ field.title }}
+                </label>
+
+                <div class="col-xs-9">
+                    <div ng-if="field.isRange" class="input-daterange input-group">
+                        <div datetimepicker disabled="false" val="entity[field.name]['lval']" type="field.type.view" identifier="{{field.name + '_' + identifier}}" position="left" id="datetimepicker_l_{{field.name + '_' + identifier}}"></div>
+                        <span style="padding: 4px" class="input-group-addon no-border-left no-border-right background-transparent">
+                            <i class="fa fa-exchange blue"></i>
+                        </span>
+                        <div datetimepicker disabled="false" val="entity[field.name]['rval']" type="field.type.view" identifier="{{field.name + '_' + identifier}}" position="right" id="datetimepicker_r_{{field.name + '_' + identifier}}" append-end-of-day='true'></div>
+                    </div>
+                    <div ng-if="!field.isRange" datetimepicker disabled="false" val="entity[field.name]['val']" type="field.type.view"></div>
+                </div>
+            </div>
+        </div>
+	</span>
+
+	<span ng-switch-when="checkbox">
+		<label>{{ field.title}}</label>
+		<input ng-model="entity[field.name]" ng-checked="entity[field.name]" type="checkbox"/>
+	</span>
+    <span ng-switch-when="radio">
+		<div ng-class="singleLine ? 'col-xs-12':'col-lg-6 col-md-6 col-sm-12'">
+            <div class="form-group">
+                <label class="control-label input-sm col-xs-3">
+                    {{ field.title }}
+                </label>
+
+                <div class="col-xs-9">
+                    <span ng-repeat="item in field.type.options"
+                          style="line-height: 28px">
+                        <input type="radio"
+                               class="ace form-control input-sm"
+                               ng-model="entity[field.name].id"
+                               ng-value="item.id">
+                        <span class="lbl">&nbsp;{{item.name}}&nbsp;&nbsp;</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+	</span>
+    <span ng-switch-when="boolean">
+		<div ng-class="singleLine ? 'col-xs-12':'col-lg-6 col-md-6 col-sm-12'">
+            <div class="form-group">
+                <label class="control-label input-sm col-xs-3">
+                    {{ field.title }}
+                </label>
+
+                <div class="col-xs-9">
+                    <div boolean
+                         entity="entity"
+                         field="field"></div>
+                </div>
+            </div>
+        </div>
+	</span>
+	<span ng-switch-when="select">
+		<div ng-class="singleLine ? 'col-xs-12':'col-lg-6 col-md-6 col-sm-12'">
+            <div class="form-group">
+                <label class="control-label input-sm col-xs-3">
+                    {{ field.title }}
+                </label>
+
+                <div class="col-xs-9">
+
+                    <div ng-if="field.type.options.length > 0"
+                         chosen
+                         placeholder="请选择..."
+                         val="entity[field.name]"
+                         items="field.type.options"
+                         deselected="true"
+                         val-param="name"></div>
+                    <input type="text"
+                           class="form-control input-sm"
+                           disabled="disabled"
+                           value="字典项不存在[{{field.type.dict}}]"
+                           ng-if="!field.type.options"/>
+                </div>
+            </div>
+        </div>
+	</span>
+	<span ng-switch-when="reference">
+		<div ng-class="singleLine ? 'col-xs-12':'col-lg-6 col-md-6 col-sm-12'">
+            <div class="form-group">
+                <label class="control-label input-sm col-xs-3">
+                    {{ field.title }}
+                </label>
+
+                <div class="col-xs-9" ng-switch on="field.type.refType">
+                    <div ng-switch-when="SINGLE_TREE" reference-tree entity="entity"
+                         field="field" fields="fields" domain="domain" disabled="false" view-others="false"></div>
+                    <div ng-switch-when="SINGLE_QUERY" reference-table entity="entity"
+                         field="field" fields="fields" domain="domain" disabled="false" view-others="false"></div>
+                    <div ng-switch-when="MAP" reference-map entity="entity" field="field" disabled="false" view-others="false"></div>
+                </div>
+            </div>
+        </div>
+	</span>
+
+</span>

@@ -1,0 +1,77 @@
+<div id="uploader" class="hidden" style="height:220px">
+    <form enctype="multipart/form-data">
+        <div class="col-xs-12" ng-class="selectedFile ? 'hidden' : ''">
+            <label class="text-center" style="cursor: pointer;border: 1px dashed #aaa; width: 100%;height: 220px">
+                <input class="hidden" type="file" name="fileUpload" fileread="selectedFile">
+                <span style="height: 220px">
+                    <div class="space"></div>
+                    <div class="blue bolder"><h2>请选择一个文件</h2></div>
+                    <span style="font-size: 80px">
+                        <i class="ace-icon ace-icon fa fa-cloud-upload blue"></i>
+                    </span>
+                </span>
+            </label>
+        </div>
+        <div class="col-xs-12 text-left" ng-class="selectedFile ? '' : 'hidden'">
+            <div class="row">
+                <span class="col-xs-12" style="overflow: hidden;"><h1 ng-bind="selectedFile.name" style="width:1000px;"></h1></span>
+            </div>
+            <div class="row" style="border-bottom: 1px solid #DCE8F1;border-top: 1px solid #DCE8F1;">
+                <span class="col-xs-5" ng-class="tooBig ? 'red':''"><h6 style="line-height: 30px;">大小：{{selectedFile.size}}（byte）</h6></span>
+                    <span class="col-xs-7 text-right">
+                        <h6>
+                            <button type="button" class="btn btn-primary btn-xs" ng-disabled="uploading && !finished"
+                                    ng-click="reselect()">
+                                <i class="fa fa-backward"></i>
+                                <span>重选</span>
+                            </button>
+                            <button type="button" class="btn btn-success btn-xs" ng-click="sendFile();" ng-disabled="!uploadable">
+                                <i class="fa fa-upload"></i>
+                                <span>导入</span>
+                            </button>
+                        </h6>
+                    </span>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 center widget-main">
+                    <div class="knob-container inline">
+                        <input type="text" id="uploadingInputId" class="input-small knob" value="0" data-fgColor="#87B87F"/>
+                    </div>
+                    <div style="position: relative; top: -10px" ng-bind="uploadLabel"></div>
+                </div>
+                <div class="col-xs-4 center widget-main">
+                    <div class="knob-container inline">
+                        <input type="text" id="processingInputId" class="input-small knob" value="0"
+                               data-displayInput="false"
+                               data-fgColor="#B8877F"/>
+                    </div>
+                    <div style="position: relative; top: -10px" ng-bind="processLabel"></div>
+                </div>
+                <div class="col-xs-4 center widget-main">
+                    <div style="line-height: 60px; position: relative; top:13px" class="bigger-150">
+                        <i class="fa fa-warning red" ng-show="warning"></i>
+                        <i class="fa fa-check green" ng-show="success"></i>
+                        <span ng-bind="resultLabel"></span>
+                    </div>
+
+                    <div style="position: relative; top: -4px" ng-show="download"><a style="cursor: pointer" ng-href="{{downloadUrl}}">下载错误文件</a></div>
+                    <div style="position: relative; top: -4px" ng-show="finished">总耗时：{{elapsed}}ms</div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(".knob").knob({
+        readOnly: true,
+        angleArc: 250,
+        angleOffset: -125,
+        width: 80,
+        height: 80,
+        min: 0,
+        max: 100,
+        thickness: '.3',
+        displayPrevious: true
+    });
+
+</script>

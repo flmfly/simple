@@ -1,0 +1,8 @@
+<div bindonce ng-repeat="field in fields" class="form-horizontal">
+    <ng-include src="'app/shared/directives/search-field.tpl.html'"></ng-include>
+</div>
+<div class="col-xs-12" ng-show="debug">
+    <h1>Your search JSON:</h1>
+    {{ entity }}
+</div>
+<!--| filter:{type:{disabled:false}}-->

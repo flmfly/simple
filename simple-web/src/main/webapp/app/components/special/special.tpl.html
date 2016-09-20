@@ -1,0 +1,37 @@
+<div class="page-header" style="padding-bottom: 10px;">
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary btn-xs"
+                ng-click="queryData();queryAreaToggle.isShown=false;applyToggle();">
+            <i class="fa fa-search"></i>&nbsp;&nbsp;查询
+        </button>&nbsp;
+    </div><div class="btn-group">
+        <button type="button" id="queryToggle" class="btn btn-info btn-xs"
+                ng-click="toggle();">
+            <i class="fa bigger-120"ng-class="queryAreaToggle.isShown ? 'fa-level-up':'fa-level-down'"></i>&nbsp;&nbsp;&nbsp;{{queryAreaToggle.isShown?queryAreaToggle.showButtonName:queryAreaToggle.hideButtonName}}
+        </button>&nbsp;
+    </div>
+</div>
+
+<!-- /.page-header -->
+
+<div class="row">
+    <div class="col-xs-12">
+        <!-- QUERY CONTENT BEGINS -->
+        <div id="query_area" ng-style="queryAreaToggle.style">
+            <div class="row">
+                <div dynamic-search entity="query" domain="domain"></div>
+            </div>
+        </div>
+        <!-- QUERY CONTENT ENDS -->
+
+        <div ng-switch="result.type">
+            <div ng-switch-when="TIMELINE">
+                <ng-include src="'app/components/special/special_timeline.tpl.html'"></ng-include>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->

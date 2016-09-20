@@ -1,0 +1,48 @@
+
+
+.reference-btn {
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.background-transparent {
+    background-color: transparent;
+}
+
+
+
+.ui-jqgrid .ui-jqgrid-labels th {
+    border-right: 1px solid #E1E1E1 !important;
+    text-align: center !important;
+}
+
+.ui-jqgrid-btable {
+    background-color: #ffffff;
+}
+
+.ui-jqgrid-labels {
+    height: 40px;
+}
+
+.ui-jqgrid .ui-pager-control {
+    height: 48px;
+}
+
+.ui-jqgrid .ui-jqgrid-pager {
+    height: 50px;
+}
+
+#location_list {
+    padding-top:3px;
+}
+#location_list a {
+    margin: 3px;
+    cursor: pointer;
+}
+#outlet_list {
+    padding-top:3px;
+}
+#outlet_list a {
+    margin: 3px;
+    cursor: pointer;
+}

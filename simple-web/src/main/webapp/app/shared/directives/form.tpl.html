@@ -1,0 +1,71 @@
+<div bindonce ng-repeat="group in groups" class="row">
+    <div class="col-xs-12 ui-widget-container-col">
+        <div class="widget-box" ng-class="$index == 0 ? '':'collapsed'"
+             style="border-top: 2px solid #4c8fbd;box-shadow: 0 -2px 3px 0 rgba(0,0,0,0.15);">
+            <div class="widget-header widget-header-small"
+                 ondblclick="$('.widget-toolbar a', $(this)).click();setTimeout(function(){$(this).focus();}, 1);">
+                <h6 class="widget-title">
+                    <i class="green ace-icon fa fa-bookmark bigger-120"></i>
+                    <span ng-bind="group.title"></span>
+                </h6>
+
+                <div class="widget-toolbar">
+                    <a href data-action="collapse" class="no-margin no-padding">
+                        <i class="ace-icon fa" ng-class="$index == 0 ? 'fa-chevron-up':'fa-chevron-down'"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="widget-body">
+                <div class="widget-main container-fluid">
+                    <div class="row">
+                        <div form-fields entity="entity" fields="group.fields" domain="domain" readonly="readonly"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-if="hasTabs">
+    <div class="space-4"></div>
+    <div class="tabbable">
+        <ul class="nav nav-tabs">
+            <li ng-repeat="field in fields | filter:{type:{view:'tab'}}"
+                ng-click="tabClick(field.name)"
+                    ng-class="$index == 0 ? 'active':''">
+                <a data-toggle="tab"
+                   ng-href="#{{field.name}}" target="_self"><i class="light-blue ace-icon fa fa-tag bigger-120"></i>{{field.title}}
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content" style="padding: 7px">
+            <div ng-repeat="field in fields | filter:{type:{view:'tab'}}" id="{{field.name}}"
+                 class="tab-pane"
+                    ng-class="$index == 0 ? 'active in':''">
+                <div class="row" ng-switch on="field.type.tabType">
+                    <div ng-switch-when="select_tree" sub-select-tree name="{{field.name}}"></div>
+                    <div ng-switch-when="table">
+                        <ng-include src="'app/components/subList/subList.tpl.html'"></ng-include>
+                    </div>
+                    <div ng-switch-when="select_list">
+                        <ng-include src="'app/components/selectedSubList/selectedSubList.tpl.html'"></ng-include>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-if="debug">
+    <div>
+        <h1>Your entity JSON:</h1>
+        {{ entity }} {{rtnData}}
+    </div>
+    <div>
+        <h1>Your fields JSON:</h1>
+        {{ fields }}
+    </div>
+    <div>
+        <h1>Your tabs JSON:</h1>
+        {{ tabs }}
+    </div>
+</div>

@@ -1,0 +1,163 @@
+<!--also suitable for creation-->
+<style>
+    .field-title {
+        padding-left: 10px;
+        padding-right: 0px;
+    }
+
+    .field-input {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    @media (min-width: 1200px) {
+        .col-lg-1_5 {
+            width: 11.2%;
+        }
+
+        .col-lg-10_5 {
+            width: 88.8%;
+        }
+    }
+</style>
+<span ng-switch on="field.type.view" ng-hide="!field.visable">
+    <span ng-switch-when="textarea">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="form-group">
+                <label ng-class="largeTitleCss">
+                    {{ field.title }}
+                    <i ng-show="field.refField" class="blue fa fa-share-alt"></i>
+                </label>
+
+                <div ng-class="largeFieldCss">
+                    <textarea id="{{domain.domainName}}_{{field.name}}"
+                              class="form-control"
+                              readonly
+                              ng-model="entity[field.name]"></textarea>
+                </div>
+            </div>
+        </div>
+	</span>
+	<span ng-switch-when="input||datetime||date||time">
+		<div ng-class="normalFormGroupCss">
+            <div class="form-group">
+                <label ng-class="normalTitleCss">
+                    {{ field.title }}
+                    <i ng-show="field.refField" class="blue fa fa-share-alt"></i>
+                </label>
+
+                <div ng-class="normalFieldCss">
+                    <input type="text"
+                           class="form-control input-sm"
+                           readonly
+                           ng-model="entity[field.name]"/>
+                </div>
+            </div>
+        </div>
+	</span>
+
+    <span ng-switch-when="radio">
+		<div ng-class="normalFormGroupCss"
+             ng-hide="id == null && field.type.visable">
+            <div class="form-group">
+                <label ng-class="normalTitleCss">
+                    {{ field.title }}
+                    <i ng-show="field.refField" class="blue fa fa-share-alt"></i>
+                </label>
+
+                <div ng-class="normalFieldCss">
+                    <span ng-repeat="item in field.type.options"
+                          style="line-height: 30px">
+                        <input type="radio"
+                               class="ace input-sm"
+                               ng-model="entity[field.name].id"
+                               readonly
+                               ng-value="item.id">
+                        <span class="lbl">{{item.name}}</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+	</span>
+    <span ng-switch-when="boolean">
+		<div ng-class="normalFormGroupCss">
+            <div class="form-group">
+                <label ng-class="normalTitleCss">
+                    {{ field.title }}
+                    <i ng-show="field.refField" class="blue fa fa-share-alt"></i>
+                </label>
+
+                <div ng-class="normalFieldCss">
+                    <input type="text"
+                           class="form-control input-sm"
+                           readonly
+                           value="{{getBooleanValue(field.type.options, entity[field.name])}}"/>
+                </div>
+            </div>
+        </div>
+	</span>
+
+	<span ng-switch-when="select||enum">
+		<div ng-class="normalFormGroupCss">
+            <div class="form-group">
+                <label ng-class="normalTitleCss">
+                    {{ field.title }}
+                    <i ng-show="field.refField" class="blue fa fa-share-alt"></i>
+                </label>
+
+                <div ng-class="normalFieldCss">
+                    <input type="text"
+                           class="form-control input-sm"
+                           readonly
+                           ng-model="entity[field.name]['name']"/>
+                </div>
+            </div>
+        </div>
+	</span>
+	<span ng-switch-when="reference">
+		<div ng-class="normalFormGroupCss">
+            <div class="form-group">
+                <label ng-class="normalTitleCss">
+                    {{ field.title }}
+                    <i ng-show="field.type.refFields.length > 0 || field.refField" class="blue fa fa-share-alt">
+                    </i>
+                </label>
+
+                <div ng-class="normalFieldCss">
+                    <input type="text" class="form-control input-sm"
+                           readonly
+                           ng-model="entity[field.type.refName][field.type.refLabel]"/>
+                </div>
+            </div>
+        </div>
+
+        <div ng-repeat="refField in field.type.refFields"
+             ng-class="normalFormGroupCss">
+            <div class="form-group">
+                <label ng-class="normalTitleCss">
+                    {{ refField.title }}
+                    <i class="blue fa fa-share-alt"></i>
+                </label>
+
+                <div ng-class="normalFieldCss">
+                    <div reference-view target="entity[field.name]" path="refField.name"></div>
+                </div>
+            </div>
+        </div>
+	</span>
+	
+	<span ng-switch-when="qrcode">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="form-group">
+                <label ng-class="largeTitleCss">
+                    {{ field.title }}
+                    <i ng-show="field.refField" class="blue fa fa-share-alt"></i>
+                </label>
+
+                <div ng-class="largeFieldCss">
+                    <div qrcode entity="entity" field="field"></div>
+                </div>
+            </div>
+        </div>
+	</span>
+</span>

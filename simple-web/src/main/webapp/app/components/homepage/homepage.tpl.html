@@ -1,0 +1,159 @@
+<script src="assets/libs/highcharts/highcharts.js"></script>
+<script src="assets/libs/highcharts/highcharts-more.js"></script>
+
+
+<div class="row">
+    <div class="col-xs-12 col-sm-6 widget-container-col">
+        <!-- #section:custom/widget-box -->
+        <div class="widget-box">
+            <div class="widget-header">
+                <h5 class="widget-title">
+                    2014年10月各省返单情况
+                </h5>
+
+                <!-- #section:custom/widget-box.toolbar -->
+                <!--<div class="widget-toolbar">-->
+                    <!--<a href="#" data-action="fullscreen" class="orange2">-->
+                        <!--<i class="ace-icon fa fa-expand"></i>-->
+                    <!--</a>-->
+                <!--</div>-->
+
+                <!-- /section:custom/widget-box.toolbar -->
+            </div>
+
+            <div class="widget-body">
+                <div class="widget-main">
+                    <ng-include src="'app/components/highcharts/line.html'"></ng-include>
+                </div>
+            </div>
+        </div>
+
+        <!-- /section:custom/widget-box -->
+    </div>
+
+    <div class="col-xs-12 col-sm-6 widget-container-col">
+        <div class="widget-box">
+            <!-- #section:custom/widget-box.options -->
+            <div class="widget-header">
+                <h5 class="widget-title">
+                <!--<h5 class="widget-title bigger lighter">-->
+                    <!--<i class="ace-icon fa fa-table"></i>-->
+                    操作中心货量占比（12月第4周）
+                </h5>
+            </div>
+
+            <!-- /section:custom/widget-box.options -->
+            <div class="widget-body">
+                <div class="widget-main">
+                    <ng-include src="'app/components/highcharts/pie.html'"></ng-include>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.span -->
+</div><!-- /.row -->
+
+<div class="space-5"></div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-6 widget-container-col">
+        <!-- #section:custom/widget-box -->
+        <div class="widget-box">
+            <div class="widget-header">
+                <h5 class="widget-title">Polar</h5>
+
+                <!-- #section:custom/widget-box.toolbar -->
+                <!--<div class="widget-toolbar">-->
+                <!--<a href="#" data-action="fullscreen" class="orange2">-->
+                <!--<i class="ace-icon fa fa-expand"></i>-->
+                <!--</a>-->
+                <!--</div>-->
+
+                <!-- /section:custom/widget-box.toolbar -->
+            </div>
+
+            <div class="widget-body">
+                <div class="widget-main">
+                    <ng-include src="'app/components/highcharts/polar.html'"></ng-include>
+                </div>
+            </div>
+        </div>
+
+        <!-- /section:custom/widget-box -->
+    </div>
+
+    <div class="col-xs-12 col-sm-6 widget-container-col">
+        <div class="widget-box">
+            <!-- #section:custom/widget-box.options -->
+            <div class="widget-header">
+                <h5 class="widget-title bigger lighter">
+                    <!--<i class="ace-icon fa fa-table"></i>-->
+                    Spider
+                </h5>
+            </div>
+
+            <!-- /section:custom/widget-box.options -->
+            <div class="widget-body">
+                <div class="widget-main">
+                    <ng-include src="'app/components/highcharts/spider.html'"></ng-include>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.span -->
+</div><!-- /.row -->
+<div class="space-5"></div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 widget-container-col">
+        <!-- #section:custom/widget-box -->
+        <div class="widget-box">
+            <div class="widget-header">
+                <h5 class="widget-title">Combo</h5>
+
+                <!-- #section:custom/widget-box.toolbar -->
+                <!--<div class="widget-toolbar">-->
+                <!--<a href="#" data-action="fullscreen" class="orange2">-->
+                <!--<i class="ace-icon fa fa-expand"></i>-->
+                <!--</a>-->
+                <!--</div>-->
+
+                <!-- /section:custom/widget-box.toolbar -->
+            </div>
+
+            <div class="widget-body">
+                <div class="widget-main">
+                    <ng-include src="'app/components/highcharts/combo.html'"></ng-include>
+                </div>
+            </div>
+        </div>
+
+        <!-- /section:custom/widget-box -->
+    </div>
+</div><!-- /.row -->
+
+<script>
+
+//    jQuery(function($) {
+//        $('.widget-container-col').sortable({
+//            connectWith: '.widget-container-col',
+//            items:'> .widget-box',
+//            handle: ace.vars['touch'] ? '.widget-header' : false,
+//            cancel: '.fullscreen',
+//            opacity:0.8,
+//            revert:true,
+//            forceHelperSize:true,
+//            placeholder: 'widget-placeholder',
+//            forcePlaceholderSize:true,
+//            tolerance:'pointer',
+//            start: function(event, ui) {
+//                //when an element is moved, it's parent becomes empty with almost zero height.
+//                //we set a min-height for it to be large enough so that later we can easily drop elements back onto it
+//                ui.item.parent().css({'min-height':ui.item.height()})
+//                //ui.sender.css({'min-height':ui.item.height() , 'background-color' : '#F5F5F5'})
+//            },
+//            update: function(event, ui) {
+//                ui.item.parent({'min-height':''})
+//                //p.style.removeProperty('background-color');
+//            }
+//        });
+//    });
+</script>

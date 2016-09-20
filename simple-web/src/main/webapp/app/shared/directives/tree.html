@@ -1,0 +1,10 @@
+<div class="input-group">
+    <input type="hidden" ng-model="entity[field.type.refName][field.type.refId]"/>
+    <input type="text" class="form-control input-sm"
+           ng-disabled="field.type.disabled"
+           ng-model="entity[field.type.refName][field.type.refLabel]"/>
+    <span style="cursor: pointer" class="input-group-addon"
+          ng-click="show(field.type, domain.domainName)">
+        <i class="fa fa-list"></i>
+    </span>
+</div>

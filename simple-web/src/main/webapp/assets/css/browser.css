@@ -1,0 +1,51 @@
+.browser {
+    display: inline-block;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    height: 16px;
+    min-height: 16px;
+    width: 16px;
+    min-width: 16px;
+    position:relative;
+}
+
+.browser img {
+    width: 16px;
+    height: 16px;
+}
+
+.ie {
+    background-image: url("internet_explorer.svg");
+    width: 16px;
+    heigth: 16px;
+}
+
+.chrome {
+    background-image: url("browser_chrome_16x16.png");
+}
+
+.safari {
+    background-image: url("browser_safari_16x16.png");
+}
+
+.firefox {
+    background-image: url("browser_firefox_16x16.png");
+}
+
+.opera {
+    background-image: url("browser_opera_16x16.png");
+}
+
+.plus10{
+    color:#4b74eb;
+    top:-4px;
+    left:-2px;
+    font-size:10px;
+    font-weight: bold;
+}
+
+.plus10:before {
+    content: "10+";
+}

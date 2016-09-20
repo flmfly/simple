@@ -1,0 +1,85 @@
+<div class="page-header" style="padding-bottom: 10px;">
+    <div class="btn-group" ng-if="domainDesc.standarOperation.add">
+        <button type="button" class="btn btn-primary btn-xs"
+                ng-click="addRow()">
+            <i class="fa fa-plus bigger-110"></i>&nbsp;&nbsp;新增
+        </button>&nbsp;
+    </div><div class="btn-group" ng-if="domainDesc.standarOperation.delete">
+        <button class="btn btn-danger btn-xs"
+                ng-click="delRows()">
+            <i class="fa fa-trash bigger-110"></i>&nbsp;&nbsp;删除
+        </button>&nbsp;
+    </div><div class="btn-group" ng-if="domainDesc.standarOperation.imp || hasUpdateImport">
+        <button data-toggle="dropdown"
+                type="button"
+                class="btn btn-xs dropdown-toggle"
+                ng-class="getDomainDescFinished ? 'btn-primary' : ''">
+            <i class="fa fa-upload bigger-110"></i>&nbsp;&nbsp;导入
+            <i class="ace-icon fa fa-caret-down icon-on-right"></i>
+        </button>&nbsp;
+        <ul class="dropdown-menu" ng-class="getDomainDescFinished ? 'dropdown-primary' : 'dropdown-default'">
+            <li ng-if="domainDesc.standarOperation.imp"><a href="" ng-click="showImport();">导入</a></li>
+            <li ng-if="domainDesc.standarOperation.imp"><a ng-href="{{templateUrl}}">下载模版</a></li>
+            <li ng-if="hasUpdateImport"><a href="" ng-click="showImport(true);">更新导入（By {{updateImprtLabel}}）</a></li>
+        </ul>
+    </div><div class="btn-group" ng-if="domainDesc.standarOperation.export">
+        <button type="button" class="btn btn-primary btn-xs"
+                ng-click="exportExcel();">
+            <i class="fa fa-file"></i>&nbsp;&nbsp;导出
+        </button>&nbsp;
+    </div><div class="btn-group" ng-if="domainDesc.standarOperation.query">
+        <button type="button" class="btn btn-primary btn-xs"
+                ng-click="queryPage();queryAreaToggle.isShown=false;applyToggle();">
+            <i class="fa fa-search"></i>&nbsp;&nbsp;查询
+        </button>&nbsp;
+    </div><div class="btn-group" ng-if="domainDesc.standarOperation.query">
+        <button type="button" id="queryToggle" class="btn btn-info btn-xs"
+                ng-click="toggle();">
+            <i class="fa bigger-120"ng-class="queryAreaToggle.isShown ? 'fa-level-up':'fa-level-down'"></i>&nbsp;&nbsp;&nbsp;{{queryAreaToggle.isShown?queryAreaToggle.showButtonName:queryAreaToggle.hideButtonName}}
+        </button>&nbsp;
+    </div><div class="btn-group" bindonce ng-repeat="op in domainDesc.operation | filter:{multi:true}">
+        <button type="button" class="btn btn-primary btn-xs"
+                ng-click="multiOperate(op.code, op.target);">
+            <i ng-class="op.iconStyle"></i>&nbsp;&nbsp;{{op.name}}
+        </button>&nbsp;
+    </div>
+    <div class="btn-group" style="padding-top: 10px">&nbsp;&nbsp;<div spend></div></div>
+</div>
+
+<!-- /.page-header -->
+
+<div class="row">
+    <div class="col-xs-12">
+        <!-- QUERY CONTENT BEGINS -->
+        <div id="query_area" ng-style="queryAreaToggle.style">
+            <div class="row">
+                <div dynamic-search entity="query" domain="domain"></div>
+            </div>
+        </div>
+        <!-- QUERY CONTENT ENDS -->
+        <!-- TABLE CONTENT BEGINS -->
+        <div class="row"
+             style="padding-left:15px"
+             ng-jq-grid
+             name="{{domain.domainName}}"
+             config="gridConfig">
+        </div>
+        <!-- TABLE CONTENT ENDS -->
+
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+<!--<div id="uploader">-->
+    <div uploader action="{{importUrl}}" status="importInProgress" domain-name="{{domain.domainName}}"></div>
+<!--</div>-->
+
+<!-- /.page-content-area -->
+<div ng-if="debug">
+    <h1>Your sortInfo:</h1>
+    {{page.sort}}
+</div>
+<div ng-if="debug">
+    <h1>Your selected items:</h1>
+    {{gridOptions.selectedItems}}
+</div>

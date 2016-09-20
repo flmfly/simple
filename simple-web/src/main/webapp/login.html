@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="components.login">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="utf-8"/>
+    <title>Login Page</title>
+
+    <meta name="description" content="User login page"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/css/font-awesome.css"/>
+
+    <!-- text fonts -->
+    <link rel="stylesheet" href="assets/css/ace-fonts.css"/>
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="assets/css/ace.min.css"/>
+    <link rel="stylesheet" href="assets/css/browser.css"/>
+
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="assets/css/ace-part2.css"/>
+    <![endif]-->
+    <link rel="stylesheet" href="assets/css/ace-rtl.css"/>
+
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="assets/css/ace-ie.css"/>
+    <![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.js"></script>
+    <![endif]-->
+    <style>
+        .placeholder { color: #aaa }
+    </style>
+</head>
+
+<body class="login-layout light-login" ng-controller="LoginController">
+<div class="main-container">
+    <div class="main-content">
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1">
+                <div class="login-container">
+                    <div class="center">
+                        <h1>
+                            <i class="ace-icon fa fa-leaf green smaller-90"></i>
+                            <span class="red"></span>
+                            <span class="grey smaller-90" id="id-text2">${application.name}</span>
+                        </h1>
+                        <!--<h4 class="blue" id="id-company-text">&copy; 中邮物流供应链管理中心</h4>-->
+                    </div>
+
+                    <div class="space-6"></div>
+
+                    <div class="position-relative">
+                        <div id="login-box" class="login-box visible widget-box no-border">
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <h4 class="header blue lighter bigger">
+                                        <i class="ace-icon fa fa-coffee green"></i>
+                                        请输入您的登录信息
+                                    </h4>
+
+                                    <div class="space-6"></div>
+
+                                    <div ng-class="error ? 'alert alert-danger': 'hidden'" ng-bind="error" style="white-space:pre;max-width:none;"></div>
+
+                                    <form>
+                                        <fieldset>
+                                            <label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="text" id="input_account" class="form-control" ng-keydown="keyDown($event)" placeholder="用户名" ng-model="user.account"/>
+															<i class="ace-icon fa fa-user"></i>
+														</span>
+                                            </label>
+
+                                            <label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="password" id="input_password" class="form-control" ng-keydown="keyDown($event)"
+                                                                   placeholder="密码" ng-model="user.password"/>
+															<i class="ace-icon fa fa-lock"></i>
+														</span>
+                                            </label>
+
+                                            <div class="space"></div>
+
+                                            <div class="clearfix">
+                                                <label class="inline">
+                                                    <input ng-show="user.needVerify" id="input_verifyCode" type="text" style="width:55px" class="form-control"
+                                                    		ng-model="user.verifyCode" ng-keydown="keyDown($event)"
+                                                           placeholder="验证码" maxlength="4"/>
+
+                                                    <!--<input type="checkbox" class="ace" />-->
+                                                    <!--<span class="lbl"> Remember Me</span>-->
+                                                </label>
+                                                <label class="width-10"></label>
+                                                <label class="inline">
+                                                    <img ng-show="user.needVerify" title="点击更换" ng-click="refreshVerifyCode();" ng-src="{{verifyCodeUrl}}">
+                                                </label>
+
+                                                <button type="button" id="button_login" class="width-35 pull-right btn btn-sm btn-primary"
+                                                        ng-click="login($event);">
+                                                    <i class="ace-icon fa fa-key"></i>
+                                                    <span class="bigger-110">登录</span>
+                                                </button>
+                                            </div>
+
+                                            <div class="space-6"></div>
+
+                                            <div class="align-right">
+                                               <span class="blue">支持浏览器：</span>
+                                                <span>
+                                                    <span class="browser"><img src="assets/css/chrome_copyrighted.svg" /></span>
+                                                    <span class="browser"><img src="assets/css/internet_explorer.svg" /></span>
+                                                    <!--<span class="browser plus10"></span>-->
+                                                    <span class="browser"><img src="assets/css/firefox_copyrighted.svg" /></span>
+                                                    <span class="browser"><img src="assets/css/safari_copyrighted.svg" /></span>
+                                                    <span class="browser"><img src="assets/css/opera_copyrighted.svg" /></span>
+
+                                                </span>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                                <!-- /.widget-main -->
+
+                                <div class="toolbar clearfix">
+                                    <div>
+                                        <a href="#" ng-click="clearError();" data-target="#forgot-box" class="forgot-password-link">
+                                            <i class="ace-icon fa fa-arrow-left"></i>
+                                            忘记密码
+                                        </a>
+                                    </div>
+
+                                    <div>
+                                        <a href="#" ng-click="clearError();" data-target="#signup-box" class="user-signup-link">
+                                            修改密码
+                                            <i class="ace-icon fa fa-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.widget-body -->
+                        </div>
+                        <!-- /.login-box -->
+
+                        <div id="forgot-box" class="forgot-box widget-box no-border">
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <h4 class="header red lighter bigger">
+                                        <i class="ace-icon fa fa-key"></i>
+                                        找回密码
+                                    </h4>
+
+                                    <div class="space-6"></div>
+                                    <p>
+                                        请输入您的邮箱地址
+                                    </p>
+
+                                    <form>
+                                        <fieldset>
+                                            <label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="email" class="form-control" placeholder="邮箱" ng-model="user.email"/>
+															<i class="ace-icon fa fa-envelope"></i>
+														</span>
+                                            </label>
+
+                                            <div class="clearfix">
+                                                <button type="button" class="width-35 pull-right btn btn-sm btn-danger">
+                                                    <i class="ace-icon fa fa-lightbulb-o"></i>
+                                                    <span class="bigger-110">找回</span>
+                                                </button>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                                <!-- /.widget-main -->
+
+                                <div class="toolbar center">
+                                    <a href="#" ng-click="clearError();" data-target="#login-box" class="back-to-login-link">
+                                        返回登录
+                                        <i class="ace-icon fa fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- /.widget-body -->
+                        </div>
+                        <!-- /.forgot-box -->
+
+                        <div id="signup-box" class="signup-box widget-box no-border">
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <h4 class="header green lighter bigger">
+                                        <i class="ace-icon fa fa-users blue"></i>
+                                        修改密码
+                                    </h4>
+
+                                    <div class="space-6"></div>
+
+                                    <div ng-class="error ? 'alert alert-danger': 'hidden'" ng-bind="error" style="white-space:pre;max-width:none;"></div>
+
+                                    <form>
+                                        <fieldset>
+
+                                            <label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="text" class="form-control" placeholder="用户名" ng-model="user.account"/>
+															<i class="ace-icon fa fa-user"></i>
+														</span>
+                                            </label>
+
+                                            <label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="password" class="form-control"
+                                                                   placeholder="原密码" ng-model="user.password"/>
+															<i class="ace-icon fa fa-lock"></i>
+														</span>
+                                            </label>
+
+                                            <label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input ng-change="onNewPasswordInput()" type="password" class="form-control"
+                                                                   placeholder="新密码" ng-model="user.newPassword"/>
+															<i class="ace-icon fa fa-lock"></i>
+														</span>
+                                            </label>
+
+                                            <label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input ng-change="onNewPasswordInput()" type="password" class="form-control"
+                                                                   placeholder="确认新密码" ng-model="user.password1"/>
+															<i ng-class="'ace-icon fa ' + confirmPasswordCss"></i>
+														</span>
+                                            </label>
+
+                                            <div class="space-12"></div>
+
+                                            <div class="clearfix">
+                                                <button type="reset"
+                                                        ng-click="reset()"
+                                                        class="width-30 pull-left btn btn-sm">
+                                                    <i class="ace-icon fa fa-refresh"></i>
+                                                    <span class="bigger-110">重置</span>
+                                                </button>
+
+                                                <button type="button"
+                                                        ng-click="changePassword()"
+                                                        class="width-65 pull-right btn btn-sm btn-success">
+                                                    <span class="bigger-110">提交</span>
+
+                                                    <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+                                                </button>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+
+                                <div class="toolbar center">
+                                    <a href="#" ng-click="clearError();" data-target="#login-box" class="back-to-login-link">
+                                        <i class="ace-icon fa fa-arrow-left"></i>
+                                        返回登录
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- /.widget-body -->
+                        </div>
+                        <!-- /.signup-box -->
+                    </div>
+                    <!-- /.position-relative -->
+
+                    <!--<div class="navbar-fixed-top align-right">-->
+                    <!--<br />-->
+                    <!--&nbsp;-->
+                    <!--<a id="btn-login-dark" href="#">Dark</a>-->
+                    <!--&nbsp;-->
+                    <!--<span class="blue">/</span>-->
+                    <!--&nbsp;-->
+                    <!--<a id="btn-login-blur" href="#">Blur</a>-->
+                    <!--&nbsp;-->
+                    <!--<span class="blue">/</span>-->
+                    <!--&nbsp;-->
+                    <!--<a id="btn-login-light" href="#">Light</a>-->
+                    <!--&nbsp; &nbsp; &nbsp;-->
+                    <!--</div>-->
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.main-content -->
+</div>
+<!-- /.main-container -->
+
+<!-- basic scripts -->
+
+<!--[if !IE]> -->
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='assets/js/jquery.min.js'>" + "<" + "/script>");
+</script>
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='assets/js/jquery1x.min.js'>" + "<" + "/script>");
+</script>
+<![endif]-->
+<script type="text/javascript">
+    if ('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.js'>" + "<" + "/script>");
+</script>
+<script src="assets/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="assets/js/jquery.placeholder.js"></script>
+
+<!-- for angularjs -->
+<script src="assets/libs/angular/angular.min.js"></script>
+<script src="assets/libs/angular-route/angular-route.js"></script>
+<script src="assets/libs/restangular/dist/restangular.min.js"></script>
+<script src="assets/libs/angular-resource/angular-resource.min.js"></script>
+<script src="assets/libs/lodash_2.4.1/dist/lodash.min.js"></script>
+
+<script src="assets/js/bootbox.js"></script>
+
+<script src="app/shared/application.js"></script>
+
+<script src="app/shared/services/data.js"></script>
+<script src="app/shared/services/dialog.js"></script>
+<script src="app/shared/services/loading.js"></script>
+
+<script src="app/components/login/login.js"></script>
+
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+    jQuery(function ($) {
+        $(document).on('click', '.toolbar a[data-target]', function (e) {
+            e.preventDefault();
+            var target = $(this).data('target');
+            $('.widget-box.visible').removeClass('visible');//hide others
+            $(target).addClass('visible');//show target
+        });
+        $('input, textarea').placeholder();
+    });
+</script>
+</body>
+</html>

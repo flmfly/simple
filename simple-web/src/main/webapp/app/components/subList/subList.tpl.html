@@ -1,0 +1,19 @@
+<div class="" ng-controller="SubListController">
+    <!--<div class="col-xs-12">-->
+        <!--query-->
+    <!--</div>-->
+    <div class="col-xs-12"
+         ng-jq-grid
+         name="{{field.name}}"
+         config="config"
+         data="data">
+    </div>
+
+    <div ng-if="debug">{{sub}}</div>
+
+    <div ng-if="!readonly" class="row" id="sub-{{field.name}}" style="height:0px; min-height:0px; overflow: hidden">
+        <div ng-show="validation" class="alert alert-danger" style="white-space:pre;max-width:none;">{{validation}}</div>
+        <div form-fields entity="sub" fields="subFields" domain="domain"></div>
+        <div ng-show="debug">{{sub}}</div>
+    </div>
+</div>

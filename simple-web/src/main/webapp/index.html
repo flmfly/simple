@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html lang="en" ng-app="app" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html lang="en" ng-app="app" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html lang="en" ng-app="app" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="app" class="no-js"> <!--<![endif]-->
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="utf-8"/>
+    <title>Welcome - Simple Application</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+
+    <!--[if !IE]> -->
+    <!--<link rel="stylesheet" href="assets/css/pace.css"/>-->
+    <link rel="stylesheet" href="assets/css/browser.css"/>
+
+    <!--<script data-pace-options='{ "ajax": true, "document": true, "eventLag": false, "elements": false }'-->
+            <!--src="assets/js/pace.js"></script>-->
+
+    <!-- <![endif]-->
+
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/css/ui.jqgrid.css"/>
+
+    <!-- jquery ui -->
+    <link rel="stylesheet" href="assets/css/jquery-ui.css"/>
+    <link rel="stylesheet" href="assets/css/chosen.css"/>
+
+    <!-- blueimp -->
+    <link rel="stylesheet" href="assets/libs/blueimp-gallery/css/blueimp-gallery.min.css">
+
+    <!-- text fonts -->
+    <link rel="stylesheet" href="assets/css/ace-fonts.css"/>
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style"/>
+
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="assets/css/ace-part2.css" class="ace-main-stylesheet"/>
+    <![endif]-->
+
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="assets/css/ace-ie.css"/>
+    <![endif]-->
+
+    <!-- ace settings handler -->
+    <script src="assets/js/ace-extra.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+    <!--[if lte IE 8]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.js"></script>
+    <![endif]-->
+
+    <!-- for angularjs -->
+
+    <!--[if lte IE 8]>
+    <script>
+        document.createElement('ng-include');
+        document.createElement('ng-pluralize');
+        document.createElement('ng-view');
+
+        // Optionally these for CSS
+        document.createElement('ng:include');
+        document.createElement('ng:pluralize');
+        document.createElement('ng:view');
+    </script>
+    <![endif]-->
+
+    <!-- for angularjs end -->
+
+
+    <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.css"/>
+
+    <!-- jstree -->
+    <link rel="stylesheet" href="assets/libs/jstree/dist/themes/default/style.min.css"/>
+    <link rel="stylesheet" href="css/simple.css"/>
+
+</head>
+
+<body class="no-skin">
+<!-- #section:basics/navbar.layout -->
+<div id="navbar" class="navbar navbar-default">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('navbar', 'fixed')
+        } catch (e) {
+        }
+    </script>
+
+    <div class="navbar-container" id="navbar-container">
+        <!-- #section:basics/sidebar.mobile.toggle -->
+        <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+            <span class="sr-only">Toggle sidebar</span>
+
+            <span class="icon-bar"></span>
+
+            <span class="icon-bar"></span>
+
+            <span class="icon-bar"></span>
+        </button>
+
+        <!-- /section:basics/sidebar.mobile.toggle -->
+        <div class="navbar-header pull-left">
+            <!-- #section:basics/navbar.layout.brand -->
+            <a href="" class="navbar-brand">
+                <small>
+                    <!--<i class="fa fa-leaf"></i>-->
+                    ${application.name}
+                </small>
+            </a>
+
+            <!-- /section:basics/navbar.layout.brand -->
+
+            <!-- #section:basics/navbar.toggle -->
+
+            <!-- /section:basics/navbar.toggle -->
+        </div>
+
+        <!-- #section:basics/navbar.dropdown -->
+        <div class="navbar-buttons navbar-header pull-right" role="navigation">
+            <ul class="nav ace-nav">
+                <!--<li class="purple">-->
+                    <!--<a data-toggle="dropdown" class="dropdown-toggle" href="">-->
+                        <!--<i class="ace-icon fa fa-bell icon-animated-bell"></i>-->
+                        <!--&lt;!&ndash;<span class="badge badge-important">8</span>&ndash;&gt;-->
+                    <!--</a>-->
+                <!--</li>-->
+
+                <div message-view include-replace></div>
+
+
+                <!-- #section:basics/navbar.user_menu -->
+                <li class="light-blue" ng-controller="LogoutController">
+                    <a data-toggle="dropdown" href="" class="dropdown-toggle">
+                        <!-- <img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo"/> -->
+                        <i class="fa fa-user bigger-200" style="position: relative;top: 5px;right:2px;"></i>
+								<span class="user-info">
+									<small>欢迎</small>
+									<span ng-bind="user.name"></span>
+								</span>
+
+                        <i class="ace-icon fa fa-caret-down"></i>
+                    </a>
+
+                    <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <li ng-controller="NIYCtrl">
+                            <a href="" ng-click="NIY()">
+                                <i class="ace-icon fa fa-cog"></i>
+                                设置
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#page/profile">
+                                <i class="ace-icon fa fa-user"></i>
+                                个人信息
+                            </a>
+                        </li>
+
+                        <li class="divider"></li>
+
+                        <li>
+                            <a href="" ng-click="logout()">
+                                <i class="ace-icon fa fa-power-off"></i>
+                                注销
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- /section:basics/navbar.user_menu -->
+            </ul>
+        </div>
+
+        <!-- /section:basics/navbar.dropdown -->
+    </div>
+    <!-- /.navbar-container -->
+</div>
+
+<!-- /section:basics/navbar.layout -->
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('main-container', 'fixed')
+        } catch (e) {
+        }
+    </script>
+
+    <!-- #section:basics/sidebar -->
+    <div id="sidebar" class="sidebar                  responsive">
+        <script type="text/javascript">
+            try {
+                ace.settings.check('sidebar', 'fixed')
+            } catch (e) {
+            }
+        </script>
+
+        <div class="sidebar-shortcuts" id="sidebar-shortcuts" ng-controller="NIYCtrl">
+            <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+                <button class="btn btn-success" ng-click="NIY()">
+                    <i class="ace-icon fa fa-signal"></i>
+                </button>
+
+                <button class="btn btn-info" ng-click="NIY()">
+                    <i class="ace-icon fa fa-pencil"></i>
+                </button>
+
+                <!-- #section:basics/sidebar.layout.shortcuts -->
+                <button class="btn btn-warning" ng-click="NIY()">
+                    <i class="ace-icon fa fa-users"></i>
+                </button>
+
+                <button class="btn btn-danger" ng-click="NIY()">
+                    <i class="ace-icon fa fa-cogs"></i>
+                </button>
+
+                <!-- /section:basics/sidebar.layout.shortcuts -->
+            </div>
+
+            <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+                <span class="btn btn-success"></span>
+
+                <span class="btn btn-info"></span>
+
+                <span class="btn btn-warning"></span>
+
+                <span class="btn btn-danger"></span>
+            </div>
+        </div>
+        <!-- /.sidebar-shortcuts -->
+
+        <ul class="nav nav-list" menu>
+        </ul>
+        <!-- /.nav-list -->
+
+        <!-- #section:basics/sidebar.layout.minimize -->
+        <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse" onclick="$(window).resize();">
+            <i class="ace-icon fa fa-angle-double-left"
+               data-icon1="ace-icon fa fa-angle-double-left"
+               data-icon2="ace-icon fa fa-angle-double-right"></i>
+        </div>
+
+        <!-- /section:basics/sidebar.layout.minimize -->
+        <script type="text/javascript">
+            try {
+                ace.settings.check('sidebar', 'collapsed')
+            } catch (e) {
+            }
+        </script>
+    </div>
+
+    <!-- /section:basics/sidebar -->
+    <div class="main-content">
+        <div class="main-content-inner">
+            <!-- #section:basics/content.breadcrumbs -->
+            <div class="breadcrumbs" id="breadcrumbs">
+                <script type="text/javascript">
+                    try {
+                        ace.settings.check('breadcrumbs', 'fixed')
+                    } catch (e) {
+                    }
+                </script>
+
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        <a href="#!" target="_self">首页</a>
+                    </li>
+                </ul>
+                <!-- /.breadcrumb -->
+
+                <!-- #section:basics/content.searchbox -->
+                <div class="nav-search hidden" id="nav-search">
+                    <form class="form-search">
+								<span class="input-icon">
+									<input type="text" placeholder="Search ..." class="nav-search-input"
+                                           id="nav-search-input" autocomplete="off"/>
+									<i class="ace-icon fa fa-search nav-search-icon"></i>
+								</span>
+                    </form>
+                </div>
+                <!-- /.nav-search -->
+
+                <!-- /section:basics/content.searchbox -->
+            </div>
+
+            <!-- /section:basics/content.breadcrumbs -->
+            <div class="page-content">
+                <div class="page-content-area" data-ajax-content="true">
+                    <div ng-view>
+                        <!-- route content goes here -->
+                    </div>
+                </div>
+                <!-- /.page-content-area -->
+            </div>
+            <!-- /.page-content -->
+        </div>
+    </div>
+    <!-- /.main-content -->
+
+    <div class="footer">
+        <div class="footer-inner">
+            <!-- #section:basics/footer -->
+            <div class="footer-content">
+                <span class="">
+                    Powered by Simple &copy; 2014-2016
+                    <!--&copy;-->
+                </span>
+            </div>
+
+            <!-- /section:basics/footer -->
+        </div>
+    </div>
+
+    <a href="" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+    </a>
+</div>
+<!-- /.main-container -->
+
+<!-- basic scripts -->
+
+<!--[if !IE]> -->
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='assets/js/jquery.min.js'>" + "<" + "/script>");
+</script>
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='assets/js/jquery1x.min.js'>" + "<" + "/script>");
+</script>
+<![endif]-->
+<script type="text/javascript">
+    if ('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.js'>" + "<" + "/script>");
+</script>
+<script src="assets/js/bootstrap.min.js"></script>
+
+<!-- ace scripts -->
+<script src="assets/js/ace/elements.scroller.js"></script>
+<script src="assets/js/ace/elements.colorpicker.js"></script>
+<script src="assets/js/ace/elements.fileinput.js"></script>
+<script src="assets/js/ace/elements.typeahead.js"></script>
+<script src="assets/js/ace/elements.wysiwyg.js"></script>
+<script src="assets/js/ace/elements.spinner.js"></script>
+<script src="assets/js/ace/elements.treeview.js"></script>
+<script src="assets/js/ace/elements.wizard.js"></script>
+<script src="assets/js/ace/elements.aside.js"></script>
+<script src="assets/js/ace/ace.js"></script>
+<script src="assets/js/ace/ace.ajax-content.js"></script>
+<script src="assets/js/ace/ace.touch-drag.js"></script>
+<script src="assets/js/ace/ace.sidebar.js"></script>
+<script src="assets/js/ace/ace.sidebar-scroll-1.js"></script>
+<script src="assets/js/ace/ace.submenu-hover.js"></script>
+<script src="assets/js/ace/ace.widget-box.js"></script>
+<script src="assets/js/ace/ace.settings.js"></script>
+<script src="assets/js/ace/ace.settings-rtl.js"></script>
+<script src="assets/js/ace/ace.settings-skin.js"></script>
+<script src="assets/js/ace/ace.widget-on-reload.js"></script>
+<script src="assets/js/ace/ace.searchbox-autocomplete.js"></script>
+
+<!-- page specific plugin scripts -->
+
+<!--[if lte IE 8]>
+<script src="assets/js/excanvas.js"></script>
+<![endif]-->
+<script src="assets/js/jquery-ui.min.js"></script>
+<script src="assets/js/jquery.ui.touch-punch.js"></script>
+<script src="assets/js/jquery.autosize.js"></script>
+<script src="assets/js/jquery.inputlimiter.1.3.1.js"></script>
+<script src="assets/js/jquery.knob.js"></script>
+<script src="assets/js/jquery.fileupload.js"></script>
+<script src="assets/js/jquery.iframe-transport.js"></script>
+<script src="assets/js/bootbox.js"></script>
+<script src="assets/js/bootstrap-tag.js"></script>
+<script src="assets/js/qrcode.min.js"></script>
+<script src="assets/libs/jstree/dist/jstree.min.js"></script>
+<script src="assets/js/chosen.jquery.js"></script>
+<script src="assets/libs/blueimp-gallery/js/jquery.blueimp-gallery.min.js"></script>
+
+
+
+<!-- datetimepicker -->
+<script src="assets/libs/moment/moment.js"></script>
+<script src="assets/libs/moment/locale/zh-cn.js"></script>
+<script src="assets/libs/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
+
+<!-- page specific plugin scripts end -->
+
+<!-- for angularjs -->
+<script src="assets/libs/angular/angular.min.js"></script>
+<script src="assets/libs/angular-route/angular-route.min.js"></script>
+<script src="assets/libs/bindonce/bindonce.min.js"></script>
+<script src="assets/libs/restangular/dist/restangular.min.js"></script>
+<script src="assets/libs/angular-resource/angular-resource.min.js"></script>
+<script src="assets/libs/lodash/lodash.min.js"></script>
+<script src="assets/libs/jquery-form/jquery.form.js"></script>
+<script src="assets/libs/ng-ckeditor/ng-ckeditor.min.js"></script>
+<!-- for angularjs end -->
+
+<!-- for app -->
+<script src="app/app.module.js"></script>
+<script src="app/app.routes.js"></script>
+
+<script src="app/shared/application.js"></script>
+<script src="app/shared/session.js"></script>
+
+<script src="app/shared/services/data.js"></script>
+<script src="app/shared/services/dialog.js"></script>
+<script src="app/shared/services/loading.js"></script>
+<script src="app/shared/services/gallery.js"></script>
+<script src="app/shared/services/message.js"></script>
+<script src="app/shared/services/utils.js"></script>
+
+<script src="app/shared/directives/form.js"></script>
+<script src="app/shared/directives/formFields.js"></script>
+<script src="app/shared/directives/search.js"></script>
+<script src="app/shared/directives/referenceTree.js"></script>
+<script src="app/shared/directives/referenceTable.js"></script>
+<script src="app/shared/directives/referenceMap.js"></script>
+<script src="app/shared/directives/referenceView.js"></script>
+<script src="app/shared/directives/tree.js"></script>
+<script src="app/shared/directives/datetimepicker.js"></script>
+<script src="app/shared/directives/jqGrid.js"></script>
+<script src="app/shared/directives/chosen.js"></script>
+<script src="app/shared/directives/boolean.js"></script>
+<script src="app/shared/directives/uploader.js"></script>
+<script src="app/shared/directives/tagsInput.js"></script>
+<script src="app/shared/directives/spend.js"></script>
+<script src="app/shared/directives/messageView.js"></script>
+<script src="app/shared/directives/attachment.js"></script>
+<script src="app/shared/directives/htmlEditor.js"></script>
+<script src="app/shared/directives/qrcode.js"></script>
+
+<script src="app/components/subList/subList.js"></script>
+<script src="app/components/menu/menu.js"></script>
+<script src="app/components/homepage/homepage.js"></script>
+<script src="app/components/list/list.js"></script>
+<script src="app/components/edit/edit.js"></script>
+<script src="app/components/treeList/treeList.js"></script>
+<script src="app/components/switchTreeList/switchTreeList.js"></script>
+<script src="app/components/selectedSubList/selectedSubList.js"></script>
+<script src="app/components/map/map.js"></script>
+<script src="app/components/special/special.js"></script>
+<!-- for app end-->
+
+<script src="assets/js/jqGrid/jquery.jqGrid.min.js"></script>
+<script src="assets/js/jqGrid/i18n/grid.locale-cn.js"></script>
+
+<script src="assets/libs/ckeditor/ckeditor.js"></script>
+
+<script type="text/javascript">
+
+    angular.element(document).ready(function () {
+        try {
+            ace.settings.navbar_fixed(null, true);
+            ace.settings.sidebar_fixed(null, true);
+            ace.settings.breadcrumbs_fixed(null, true);
+        } catch (e) {
+        }
+
+        // override dialog's title function to allow for HTML titles
+        $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+            _title: function (title) {
+                var $title = this.options.title || '&nbsp;'
+                if (("title_html" in this.options) && this.options.title_html == true)
+                    title.html($title);
+                else
+                    title.text($title);
+            }
+        }));
+    });
+
+        //百度地图API功能
+    function loadBaiduMapJScript() {
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = "http://api.map.baidu.com/api?v=2.0&ak=xYFPf2vLl5zQ9sZMilA0vH8n&callback=baiduMap_init";
+        document.body.appendChild(script);
+    }
+    function baiduMap_init() {
+        var map = new BMap.Map("map_container");            // 创建Map实例
+        var point = new BMap.Point(116.385, 39.925); // 创建点坐标
+        map.centerAndZoom(point,15);
+        map.enableScrollWheelZoom();                 //启用滚轮放大缩小
+        map.addControl(new BMap.NavigationControl());
+
+        angular.element('#map_container').scope().$apply(function(){
+            angular.element('#map_container').scope()['map'] = map;
+        });
+    }
+</script>
+
+<!--[if lt IE 8]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+</body>
+</html>

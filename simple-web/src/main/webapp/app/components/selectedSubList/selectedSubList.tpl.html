@@ -1,0 +1,56 @@
+<div class="" ng-controller="SelectedSubListController">
+    <!--<div class="col-xs-12">-->
+    <!--query-->
+    <!--</div>-->
+    <div class="col-xs-12"
+         ng-jq-grid
+         name="{{field.name}}"
+         config="config"
+         data="data">
+    </div>
+
+    <div class="col-xs-12" id="sub-{{field.name}}" style="height:0px; overflow: hidden">
+        <div class="page-header" style="padding-bottom: 10px;">
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary btn-xs"
+                        ng-click="queryPage();queryAreaToggle.isShown=false;applyToggle();">
+                    <i class="fa fa-search bigger-110"></i>&nbsp;&nbsp;查询
+                </button>
+            </div>
+            <div class="btn-group">
+                <button type="button" id="queryToggle" class="btn btn-info btn-xs"
+                        ng-click="toggle();">
+                    <i ng-class="queryAreaToggle.isShown ? 'fa fa-chevron-up bigger-110':'fa fa-chevron-down bigger-110'"></i>
+                    &nbsp;&nbsp;{{queryAreaToggle.isShown?queryAreaToggle.showButtonName:queryAreaToggle.hideButtonName}}
+                </button>
+            </div>
+        </div>
+
+        <!-- /.page-header -->
+
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- QUERY CONTENT BEGINS -->
+                <div id="query_area" ng-style="queryAreaToggle.style">
+                    <div class="row">
+                        <div dynamic-search entity="query" domain="domain"></div>
+                    </div>
+                </div>
+                <!-- QUERY CONTENT ENDS -->
+                <!-- TABLE CONTENT BEGINS -->
+                <div class="row"
+                     style="padding-left:12px"
+                     ng-jq-grid
+                     name="{{domain.domainName}}"
+                     config="gridConfig">
+                </div>
+                <!-- TABLE CONTENT ENDS -->
+
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+        <!-- /.page-content-area -->
+
+    </div>
+</div>

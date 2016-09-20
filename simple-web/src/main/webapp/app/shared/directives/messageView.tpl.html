@@ -1,0 +1,101 @@
+<li class="purple">
+    <a data-toggle="dropdown" class="dropdown-toggle" href="">
+        <i class="ace-icon fa fa-bell" ng-class="alarms.length > 0 ? 'icon-animated-bell':''"></i>
+        <span ng-if="alarms.length > 0" class="badge badge-important">{{alarms.length}}</span>
+    </a>
+
+    <ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+        <li class="dropdown-header">
+            <i class="ace-icon fa fa-exclamation-triangle"></i>
+            {{alarms.length}}个预警
+        </li>
+
+        <li class="dropdown-content">
+            <ul class="dropdown-menu dropdown-navbar">
+                <li bindonce ng-repeat="message in alarms">
+                    <a href="" class="clearfix" ng-click="showMessage(message.deliveryId, $event)">
+                        <div class="pull-left">
+                            <div class="space-2"></div>
+                            <div>
+                                <div style="overflow:hidden; width: 190px; font-size: 16px; text-overflow:ellipsis">
+                                    {{alarms.title}}
+                                </div>
+
+                            </div>
+                            <div class="space-4"></div>
+                            <div>
+                                <span>
+                                    <i class="ace-icon fa fa-clock-o"></i>
+                                    <span>{{alarms.pushTime}}</span>
+                                </span>
+                            </div>
+                        </div>
+                        <span ng-switch on="message.priority" class="pull-right" style="vertical-align: middle">
+                            <div class="space-6"></div>
+                                <i ng-switch-when="HIGH" class="bigger-160 fa fa-exclamation red" style="padding-right: 4px"></i>
+                                <i ng-switch-when="LOW" class="bigger-140 fa fa-arrow-down grey"></i>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="dropdown-footer">
+            <a href="#">
+                See all notifications
+                <i class="ace-icon fa fa-arrow-right"></i>
+            </a>
+        </li>
+    </ul>
+</li>
+
+<li class="green">
+    <a data-toggle="dropdown" class="dropdown-toggle" href="">
+        <i class="ace-icon fa fa-envelope" ng-class="messages.length > 0 ? 'icon-animated-vertical':''"></i>
+        <span ng-if="messages.length > 0" class="badge badge-success">{{messages.length}}</span>
+    </a>
+
+    <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+        <li class="dropdown-header">
+            <i class="ace-icon fa fa-envelope-o"></i>
+            {{messages.length}}个消息
+        </li>
+
+        <li class="dropdown-content">
+            <ul class="dropdown-menu dropdown-navbar">
+                <li bindonce ng-repeat="message in messages">
+                    <a href="" class="clearfix" ng-click="showMessage(message.deliveryId, $event)">
+                        <div class="pull-left">
+                            <div class="space-2"></div>
+                            <div>
+                                <div style="overflow:hidden; width: 190px; font-size: 16px; text-overflow:ellipsis">
+                                    {{message.title}}
+                                </div>
+
+                            </div>
+                            <div class="space-4"></div>
+                            <div>
+                                <span>
+                                    <i class="ace-icon fa fa-clock-o"></i>
+                                    <span>{{message.pushTime}}</span>
+                                </span>
+                            </div>
+                        </div>
+                        <span ng-switch on="message.priority" class="pull-right" style="vertical-align: middle">
+                            <div class="space-6"></div>
+                                <i ng-switch-when="HIGH" class="bigger-160 fa fa-exclamation red" style="padding-right: 4px"></i>
+                                <i ng-switch-when="LOW" class="bigger-140 fa fa-arrow-down grey"></i>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="dropdown-footer">
+            <a href="inbox.html">
+                See all messages
+                <i class="ace-icon fa fa-arrow-right"></i>
+            </a>
+        </li>
+    </ul>
+</li>

@@ -1,0 +1,40 @@
+<div class="row" ng-controller="EditCtrl">
+    <div class="col-lg-4 col-md-4 col-sm-12">
+        <div tree></div>
+    </div>
+    <div class="col-lg-8 col-md-8 col-sm-12" style="top:4px;">
+        <div class="page-header">
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary btn-xs"
+                        ng-click="save()">
+                    <i class="fa fa-save bigger-110"></i>&nbsp;&nbsp;保存
+                </button>&nbsp;
+            </div><div class="btn-group">
+                <button type="button" class="btn btn-primary btn-xs"
+                        ng-click="add()">
+                    <i class="fa fa-plus bigger-110"></i>&nbsp;&nbsp;新增
+                </button>&nbsp;
+            </div><div class="btn-group" ng-show="entity.id">
+                <button type="button" class="btn btn-primary btn-xs"
+                        ng-click="addSub()">
+                    <i class="fa fa-plus bigger-110"></i>&nbsp;&nbsp;新增下级
+                </button>&nbsp;
+            </div><div class="btn-group" ng-show="entity.id">
+                <button class="btn btn-danger btn-xs" ng-click="del()">
+                    <i class="fa fa-trash bigger-110"></i>&nbsp;&nbsp;删除
+                </button>&nbsp;
+            </div>
+        </div>
+
+        <div ng-show="error" class="alert alert-danger" style="white-space:pre;max-width:none;">{{error}}</div>
+
+        <div dynamic-form entity="entity" domain="domain"></div>
+
+        <div ng-show="debug">
+            <h1>Your entity JSON:</h1>
+            {{ entity }} {{rtnData}}
+        </div>
+
+    </div>
+</div>
+<!-- /.row -->
